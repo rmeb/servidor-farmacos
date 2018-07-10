@@ -1,0 +1,14 @@
+{
+  "name": "servidor-farmacos",
+  "version": "0.1.0",
+  "description": "Almacen de farmacos a prescribir",
+  "main": "app.js",
+  "repository": "git@github.com:rmeb/servidor-farmacos.git",
+  "author": "Andres Santander <@ocio28>",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "pg": "^7.4.3"
+  }
+}

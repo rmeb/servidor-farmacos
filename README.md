@@ -47,7 +47,7 @@ Permite recuperar un farmaco guardado
 `GET /farmaco?q=<search string>`
 
 Permite buscar una lista de farmacos. El `<search string>` corresponde al texto a buscar
-dentro del campo `dci`. La busqueda no es sensitiva a las mayusculas/minusculas. 
+dentro del campo `dci`. La busqueda no es sensitiva a las mayusculas/minusculas.
 
 #### Response
 
@@ -85,3 +85,12 @@ El formato de cada linea del archivo de carga es el siguiente:
 | ES_RESTRINGIDO       | Binario | Indicador de la condicion de restringido del fármaco                  |
 
 
+## Install
+```
+yarn Install
+```
+
+## Start Server (port 4000)
+```
+yarn start
+```

@@ -1,31 +1,8 @@
 const {success, fail, error} = require('../utils/Reply')
 const logger = require('../utils/Logger')
+const db = require('../db/Postgresql')
 
-const DRUGS = [{
-  CENS_ID: 6663524,
-  DCI: 'aciclovir',
-  FORMA_FARMACEUTICA: 'comprimido',
-  CONCENTRACION_UNIDAD: 'mg',
-  CONCENTRACION_VALOR: 400,
-  ES_RESTRINGIDO: 'no',
-  DESCRIPCION_PROD_COMERCIAL: 'aciclovir 400 mg comprimido (Mintlab)'
-}, {
-  CENS_ID: 120123,
-  DCI: 'sertralina',
-  FORMA_FARMACEUTICA: 'comprimido',
-  CONCENTRACION_UNIDAD: 'mg',
-  CONCENTRACION_VALOR: 50,
-  ES_RESTRINGIDO: 'no',
-  DESCRIPCION_PROD_COMERCIAL: 'altruline 50 mg comprimido recubierto (Roerig)'
-}, {
-  CENS_ID: 6619658,
-  DCI: 'fentermina',
-  FORMA_FARMACEUTICA: 'cápsula',
-  CONCENTRACION_UNIDAD: 'mg',
-  CONCENTRACION_VALOR: 37.5,
-  ES_RESTRINGIDO: 'si',
-  DESCRIPCION_PROD_COMERCIAL: 'sentis 37,5 mg cápsula (Lab Chile)'
-}]
+const GET_FARMACO = 'SELECT codigo, dci, forma_farmaceutica, concentracion_valor, concentracion_unidad, es_restringido FROM farmacos WHERE codigo = $1'
 
 function getFarmaco(req, res) {
   let codigo = parseInt(req.params.codigo, 10)
@@ -35,13 +12,12 @@ function getFarmaco(req, res) {
     return fail(res, 'Parameter missing or invalid')
   }
 
-  let drug = DRUGS.find(d => d.CENS_ID === codigo)
-
-  if (drug) {
-    success(res, drug)
-  } else {
-    fail(res, 'Farmaco not found', 404)
-  }
+  db.query(GET_FARMACO, [codigo]).then(result => {
+    if (result.rows.length === 0) {
+      return fail(res, 'Farmaco not found', 404)
+    }
+    success(res, result.rows[0])
+  })
 }
 
 module.exports = {

@@ -5,7 +5,7 @@ const fetch = require('node-fetch')
 
 const ORACLE_API = 'https://restringidos-oracle.herokuapp.com'
 
-const GET_FARMACO = 'SELECT codigo, dci, forma_farmaceutica, concentracion_valor, concentracion_unidad, es_restringido FROM farmacos WHERE codigo = $1'
+const GET_FARMACO = 'SELECT codigo, dci, forma_farmaceutica, concentracion_valor, concentracion_unidad FROM farmacos WHERE codigo = $1'
 const SEARCH_FARMACO = "SELECT codigo, dci FROM farmacos WHERE dci LIKE '%' || $1 || '%'"
 const INSERT_FARMACO = 'INSERT INTO farmacos (codigo, dci, forma_farmaceutica, concentracion_valor, concentracion_unidad) values ($1, $2, $3, $4, $5)'
 const UPDATE_FARMACO = 'UPDATE farmacos SET dci = $2, forma_farmaceutica = $3, concentracion_valor = $4, concentracion_unidad = $5 WHERE codigo = $1'
